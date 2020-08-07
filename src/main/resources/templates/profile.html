@@ -1,0 +1,38 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <th:block th:include="~{/fragments/head}"></th:block>
+</head>
+<body>
+<div class="header">
+    <th:block th:include="~{/fragments/nav}"></th:block>
+</div>
+<div class="main">
+    <div class="shop_top">
+        <div class="container" th:object="${model}">
+            <h1 class="text-dark">My Profile</h1>
+
+            <hr class="hr-2 bg-dark">
+            <div class="row offset-sm-4">
+                <h4 class="font-weight-bold">Username: <span class="font-weight-light" th:text="*{username}"></span></h4>
+            </div>
+            <div class="row offset-sm-4">
+                <h4 class="font-weight-bold">Full Name: <span class="font-weight-light" th:text="*{name}"></span></h4>
+            </div>
+            <div class="row offset-sm-4">
+                <h4 class="font-weight-bold">Email: <span class="font-weight-light" th:text="*{email}"></span></h4>
+            </div>
+            <hr class="hr-2 bg-dark">
+            <div class="button-holder">
+                <a th:href="@{/users/edit}" class="btn btn-success">Edit Profile</a>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="footer">
+    <th:block th:include="~{/fragments/footer}"></th:block>
+</div>
+</body>
+</html>

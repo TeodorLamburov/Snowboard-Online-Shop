@@ -1,0 +1,87 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <th:block th:include="~{/fragments/head}"></th:block>
+</head>
+<body>
+<div class="header">
+    <th:block th:include="~{/fragments/nav}"></th:block>
+</div>
+<div class="main">
+    <div class="shop_top">
+        <div class="container">
+            <h1 class="text-center text-dark">All Boards</h1>
+            <hr class="hr-2 bg-dark">
+            <table class="table table-hover mx-auto text-center" id="table_id">
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Image</th>
+                    <th>Brand</th>
+                    <th>Model</th>
+                    <th>Name</th>
+                    <th>Size</th>
+                    <th>Price</th>
+                    <th>Actions</th>
+                </tr>
+                </thead>
+                <tbody>
+                <th:block th:each="board, iter : ${boards}">
+                    <tr>
+                        <td th:text="${iter.index + 1}"></td>
+                        <td>
+                            <a class="image-link" th:href="${board.pictureUrl}">
+                                <img th:src="${board.pictureUrl}" width="40" height="40"
+                                     alt="Bicycle">
+                            </a>
+                        </td>
+                        <td th:text="${board.productBrand}"></td>
+                        <td th:text="${board.productModel}"></td>
+                        <td th:text="${board.productName}"></td>
+                        <td th:text="${board.boardSize}"></td>
+                        <td th:text="${board.productPrice}"></td>
+                        <td>
+                            <a th:href="@{/products/details/{id}(id=*{board.id})}"
+                               class="btn btn-secondary font-weight-bold text-white">Details</a>
+                            <a th:href="@{/products/edit/{id}(id=${board.id})}"
+                               class="btn btn-success font-weight-bold text-white">Edit</a>
+                            <a href="#" data-toggle="modal" th:data-target="'#boardModal' + ${iter.index + 1}"
+                               class="btn btn-danger font-weight-bold text-white">Delete</a>
+                            <!-- Modal -->
+                            <div class="modal fade" th:id="'boardModal' + ${iter.index + 1}"  tabindex="-1" role="dialog" aria-labelledby="exampleModalLabel" aria-hidden="true">
+                                <div class="modal-dialog" role="document">
+                                    <div class="modal-content">
+                                        <div class="modal-header">
+                                            <h5 class="modal-title" id="exampleModalLabel">Delete board</h5>
+                                            <button type="button" class="close" data-dismiss="modal" aria-label="Close">
+                                                <span aria-hidden="true">&times;</span>
+                                            </button>
+                                        </div>
+                                        <div class="modal-body"
+                                             th:text="'Are you sure you want to delete ' + ${board.productBrand} + ' ' + ${board.productModel}">
+                                        </div>
+                                        <div class="modal-footer">
+                                            <button type="button" class="btn btn-secondary" data-dismiss="modal">Close</button>
+                                            <form th:action="@{/products/details/(id = *{board.id})}" th:method="post" >
+                                                <button type="submit" class="btn btn-danger">Delete</button>
+                                            </form>
+                                        </div>
+                                    </div>
+                                </div>
+                            </div>
+                        </td>
+                    </tr>
+                </th:block>
+                </tbody>
+            </table>
+            <hr class="hr-2 bg-dark">
+        </div>
+    </div>
+</div>
+<div class="footer">
+    <th:block th:include="~{/fragments/footer}"></th:block>
+</div>
+</body>
+</html>

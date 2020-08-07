@@ -1,0 +1,118 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <th:block th:include="~{/fragments/head}"></th:block>
+</head>
+<body>
+<div class="header">
+    <th:block th:include="~{/fragments/nav}"></th:block>
+</div>
+<div class="main">
+    <div class="shop_top">
+        <div class="container">
+            <h1 class="text-dark">Edit Board</h1>
+
+            <hr class="hr-2 bg-dark">
+
+            <form class="form w-auto mx-auto" th:action="@{/products/edit/{id}(id=*{id})}" th:method="post"
+                  th:object="${editModel}">
+
+                <div class="form-group row" th:classappend="${#fields.hasErrors('productName')}? 'text-danger'">
+                    <label for="productName" class="col-sm-2 col-form-label font-weight-bold">Name:</label>
+                    <div class="col-sm-8">
+                        <input required type="text" th:field="*{productName}" class="form-control" name="productName"
+                               id="productName">
+                        <small th:each="error : ${#fields.errors('productName')}"
+                               th:utext="${error}  + '&lt;br /&gt;'"></small>
+                    </div>
+                </div>
+
+                <div class="form-group row" th:classappend="${#fields.hasErrors('productBrand')}? 'text-danger'">
+                    <label for="productBrand" class="col-sm-2 col-form-label font-weight-bold">Brand:</label>
+                    <div class="col-sm-8">
+                        <input required type="text" th:field="*{productBrand}" class="form-control" name="productBrand"
+                               id="productBrand">
+                        <small th:each="error : ${#fields.errors('productBrand')}"
+                               th:utext="${error}  + '&lt;br /&gt;'"></small>
+                    </div>
+                </div>
+                <div class="form-group row" th:classappend="${#fields.hasErrors('productModel')}? 'text-danger'">
+                    <label for="productModel" class="col-sm-2 col-form-label font-weight-bold">Description:</label>
+                    <div class="col-sm-8">
+                        <textarea required type="text" th:text="*{productModel}" class="form-control"
+                                  name="productModel"
+                                  id="productModel"></textarea>
+                        <small th:each="error : ${#fields.errors('productModel')}"
+                               th:utext="${error}  + '&lt;br /&gt;'"></small>
+                    </div>
+                </div>
+                <div class="form-group row" th:classappend="${#fields.hasErrors('productCategory')}? 'text-danger'">
+                    <label for="productCategory" class="col-sm-2 col-form-label font-weight-bold">Category:</label>
+                    <div class="col-sm-8">
+                        <input required type="text" th:field="*{productCategory}" class="form-control"
+                               name="productCategory" id="productCategory">
+                        <small th:each="error : ${#fields.errors('productCategory')}"
+                               th:utext="${error}  + '&lt;br /&gt;'"></small>
+                    </div>
+                </div>
+                <div class="form-group row" th:classappend="${#fields.hasErrors('productPrice')}? 'text-danger'">
+                    <label for="productPrice" class="col-sm-2 col-form-label font-weight-bold">Price:</label>
+                    <div class="col-sm-8">
+                        <input required type="number" th:field="*{productPrice}" class="form-control"
+                               name="productPrice" id="productPrice">
+                        <small th:each="error : ${#fields.errors('productPrice')}"
+                               th:utext="${error}  + '&lt;br /&gt;'"></small>
+                    </div>
+                </div>
+
+                <div class="form-group row" th:classappend="${#fields.hasErrors('description')}? 'text-danger'">
+                    <label for="description" class="col-sm-2 col-form-label font-weight-bold">Description:</label>
+                    <div class="col-sm-8">
+                        <textarea required type="text" th:text="*{description}" class="form-control" name="description"
+                                  id="description"></textarea>
+                        <small th:each="error : ${#fields.errors('description')}"
+                               th:utext="${error}  + '&lt;br /&gt;'"></small>
+                    </div>
+                </div>
+
+                <div class="form-group row" th:classappend="${#fields.hasErrors('boardSize')}? 'text-danger'">
+                    <label for="edit-board-sizes" class="col-sm-2 col-form-label font-weight-bold">Sizes:</label>
+                    <div class="col-sm-8">
+                        <select multiple class="form-control" id="edit-board-sizes" name="boardSize">
+                        </select>
+                        <small th:each="error : ${#fields.errors('boardSize')}"
+                               th:utext="${error}  + '&lt;br /&gt;'"></small>
+                    </div>
+                </div>
+
+                <hr class="hr-2 bg-dark">
+                <div class="button-holder d-flex justify-content-center">
+                    <button type="submit" class="btn btn-success">Edit</button>
+                </div>
+            </form>
+        </div>
+    </div>
+</div>
+</div>
+</div>
+<div class="footer">
+    <th:block th:include="~{/fragments/footer}"></th:block>
+</div>
+</body>
+<script th:inline="javascript">
+    fetch('/sizes/fetch')
+        .then((response) => response.json())
+        .then((json) => {
+            let sizes = [[${editModel.boardSize}]];
+            console.log(sizes);
+            json.forEach((size) =>
+                $('#edit-board-sizes').append(
+                    sizes.includes(size.size)
+                        ? `<option selected>${size.size}</option>`
+                        : `<option>${size.size}</option>`));
+        })
+        .catch((err) => console.log(err));
+</script>
+</html>

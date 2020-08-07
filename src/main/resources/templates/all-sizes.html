@@ -1,0 +1,46 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <th:block th:include="~{/fragments/head}"></th:block>
+</head>
+<body>
+<div class="header">
+    <th:block th:include="~{/fragments/nav}"></th:block>
+</div>
+<div class="main">
+    <div class="shop_top">
+        <div class="container">
+            <h1 class="text-center text-dark">All Board Sizes</h1>
+            <table class="table table-hover mx-auto text-center">
+                <thead>
+                <tr>
+                    <th>#</th>
+                    <th>Name</th>
+                    <th>Action</th>
+                </tr>
+                </thead>
+                <tbody>
+                <th:block th:each="size, iter : ${sizes}">
+                    <tr>
+                        <th th:text="${iter.index + 1}"></th>
+                        <td th:text="${size.size}"></td>
+                        <td>
+                            <form th:action="@{/sizes/delete/{id}(id=${size.id})}" th:method="POST">
+                                <button class="btn btn-danger">Delete</button>
+                            </form>
+                        </td>
+                    </tr>
+                </th:block>
+                </tbody>
+            </table>
+            <hr class="hr-2 bg-dark">
+        </div>
+    </div>
+</div>
+<div class="footer">
+    <th:block th:include="~{/fragments/footer}"></th:block>
+</div>
+</body>
+</html>

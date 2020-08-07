@@ -1,0 +1,47 @@
+<!DOCTYPE HTML>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <th:block th:include="~{/fragments/head}"></th:block>
+</head>
+<body>
+<div class="header">
+    <th:block th:include="~{/fragments/nav}"></th:block>
+</div>
+<div class="main">
+    <div class="shop_top">
+        <div class="container">
+            <div class="row shop_box-top">
+                <div th:each="board : ${allBoards}" th:object="${board}" class="col-md-3 shop_box">
+                    <a th:href="@{/products/details/{id}(id=*{id})}">
+                        <img th:src="${board.pictureUrl}" class="img-responsive" alt=""/>
+                        <span class="new-box">
+						<span class="new-label">New</span>
+					</span>
+
+                        <span class="sale-box">
+						<span class="sale-label">Sale!</span>
+					</span>
+                        <div class="shop_desc">
+                            <h3 th:text="${board.productBrand}">Burton</h3>
+                            <p th:text="${board.productModel}">Custom</p>
+                            <span th:text="${board.productPrice}" class="actual">$12.00</span><br>
+                            <ul class="buttons">
+                                <li class="cart"><a href="#">Add To Cart</a></li>
+                                <li class="shop_btn"><a href="#">Read More</a></li>
+                                <div class="clear"></div>
+                            </ul>
+                        </div>
+                    </a>
+                </a>
+                </div>
+            </div>
+        </div>
+    </div>
+</div>
+<div class="footer">
+    <th:block th:include="~{/fragments/footer}"></th:block>
+</div>
+</body>
+</html>

@@ -1,0 +1,38 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <th:block th:include="~{/fragments/head}"></th:block>
+</head>
+<body>
+<div class="header">
+    <th:block th:include="~{/fragments/nav}"></th:block>
+</div>
+<div class="main">
+    <div class="shop_top">
+        <div class="container">
+            <form th:method="POST" th:action="@{/sizes/add}"
+                  th:object="${sizeAdd}">
+                <div class="register-top-grid">
+                    <h3>Product Size</h3>
+                    <div>
+                        <span>Size in cm
+                            <label for="add-size">*</label>
+                        </span>
+                        <input th:field="*{size}" type="text" id="add-size" name="size">
+                    </div>
+
+
+                    <div class="clear"></div>
+                </div>
+                <div class="clear"></div>
+                <div class="clear"></div>
+                <input type="submit" value="submit">
+            </form>
+        </div>
+    </div>
+</div>
+
+</body>
+</html>

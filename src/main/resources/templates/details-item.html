@@ -1,0 +1,35 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <th:block th:include="~{fragments/header}"></th:block>
+</head>
+<body>
+<div class="header">
+    <th:block th:include="~{/fragments/nav}"></th:block>
+</div>
+    <main>
+    <h1 class="text-center mt-2"><span class="badge badge-pill badge-dark">Details</span></h1>
+    <hr class="my-3"/>
+    <div class="container-fluid bg-dark w-25 m-auto ">
+        <div class="row justify-content-center ">
+            <div th:object="${product}"  class="card" style="width: 18rem;">
+
+                <div class="card-body bg-gray align-content-center text-center">
+                    <h6 th:text="*{productName}">Item name</h6>
+                    <p class="card-text" th:text="*{description}">Lorem ipsum dolor sit amet, consectetur adipisicing elit. Eligendi enim, excepturi ha </p>
+
+                    <h6 th:text="*{productBrand}"></h6>
+                    <h6 th:text="*{productModel}"></h6>
+                    <h6 th:text="*{productCategory}"></h6>
+                    <h6 th:text="*{productPrice}"></h6>
+
+                </div>
+            </div>
+        </div>
+    </div>
+</main>
+
+</body>
+</html>

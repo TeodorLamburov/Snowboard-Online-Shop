@@ -1,0 +1,82 @@
+<!DOCTYPE html>
+<html lang="en" xmlns="http://www.w3.org/1999/xhtml"
+      xmlns:th="http://www.thymeleaf.org"
+      xmlns:sec="http://www.thymeleaf.org/extras/spring-security">
+<head>
+    <th:block th:include="~{/fragments/head}"></th:block>
+</head>
+<body>
+<div class="header">
+    <th:block th:include="~{/fragments/nav}"></th:block>
+</div>
+<div class="main">
+    <div class="shop_top">
+        <div class="container">
+            <form th:method="POST" th:action="@{/products/add}"
+                  th:object="${productAdd}" enctype="multipart/form-data">
+                <div class="register-top-grid">
+                    <h3>Product Information</h3>
+                    <div>
+                        <span>Product Name
+                            <label>*</label>
+                        </span>
+                        <input th:field="*{productName}" type="text" id="" name="productName">
+                    </div>
+                    <div>
+                        <span>Brand<label>*</label></span>
+                        <input th:field="*{productBrand}" type="text" id="productBrand" name="productBrand"/>
+                    </div>
+                    <div>
+                        <span>Model<label>*</label></span>
+                        <input th:field="*{productModel}" type="text" id="productModel" name="productModel"/>
+
+                    </div>
+                    <div>
+                        <span>Category<label>*</label></span>
+                        <input th:field="*{productCategory}" type="text" id="productCategory" name="productCategory"/>
+                    </div>
+                    <div>
+                        <span>Price<label>*</label></span>
+                        <input th:field="*{productPrice}" type="number" id="productPrice" name="productPrice"/>
+                    </div>
+
+                    <div>
+                        <span>Board description<label>*</label></span>
+                        <textarea th:field="*{description}" type="text" id="description"
+                                  name="description"></textarea>
+                    </div>
+
+                    <div>
+                        <span>Size<label for="">*</label></span>
+                        <select required multiple class="form-control" id="add-board-sizes"
+                                name="boardSize">
+                            <option selected disabled>--- Select Sizes ---</option>
+                        </select>
+                    </div>
+
+                    <div>
+                        <span>Images<label>*</label></span>
+                        <input th:field="*{pictureUrl}" type="file" id="add-product-image" name="pictureUrl"/>
+                    </div>
+
+                    <div class="clear"></div>
+                </div>
+                <div class="clear"></div>
+                <div class="clear"></div>
+                <input type="submit" value="submit">
+            </form>
+        </div>
+    </div>
+</div>
+
+</body>
+<script>
+    fetch('/sizes/fetch')
+        .then((response) => response.json())
+        .then((json) => {
+            json.forEach((size) => $('#add-board-sizes')
+                .append(`<option value="${size.id}">${size.size}</option>`));
+        })
+        .catch((err) => console.log(err));
+</script>
+</html>
