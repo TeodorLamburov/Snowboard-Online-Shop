@@ -7,7 +7,7 @@
 </head>
 <body>
 <div class="header">
-    <th:block th:include="~{/fragments/nav}"></th:block>
+    <th:block th:include="~{/fragments/navbar}"></th:block>
 </div>
 <div class="main">
     <div class="shop_top">
@@ -16,11 +16,12 @@
                   th:object="${sizeAdd}">
                 <div class="register-top-grid">
                     <h3>Product Size</h3>
-                    <div>
+                    <div class="form-group" th:classappend="${#fields.hasErrors('size')}? 'text-danger'">
                         <span>Size in cm
                             <label for="add-size">*</label>
                         </span>
                         <input th:field="*{size}" type="text" id="add-size" name="size">
+                        <small th:each="error : ${#fields.errors('size')}" th:utext="${error}  + '&lt;br /&gt;'"></small>
                     </div>
 
 

@@ -7,7 +7,7 @@
 </head>
 <body>
 <div class="header">
-    <th:block th:include="~{/fragments/nav}"></th:block>
+    <th:block th:include="~{/fragments/navbar}"></th:block>
 </div>
 <div class="main">
     <div class="shop_top">
@@ -24,45 +24,50 @@
                     </div>
                 </div>
 
-                <div class="form-group row">
-                    <label for="name" class="col-sm-4 col-form-label font-weight-bold">First Name:</label>
+                <div class="form-group row" th:classappend="${#fields.hasErrors('name')}? 'text-danger'">
+                    <label for="name" class="col-sm-4 col-form-label font-weight-bold">Full Name:</label>
                     <div class="col-sm-8">
                         <input type="text" th:field="*{name}" class="form-control" name="name" id="name">
                     </div>
+                    <small th:each="error : ${#fields.errors('name')}" th:utext="${error}  + '&lt;br /&gt;'"></small>
                 </div>
 
-                <div class="form-group row">
+                <div class="form-group row" th:classappend="${#fields.hasErrors('oldPassword')}? 'text-danger'">
                     <label for="oldPassword" class="col-sm-4 col-form-label font-weight-bold">Old Password</label>
                     <div class="col-sm-8">
                         <input type="password" th:field="*{oldPassword}" class="form-control" id="oldPassword"
                                placeholder="Password..."
                                name="oldPassword" required>
                     </div>
+                    <small th:each="error : ${#fields.errors('oldPassword')}" th:utext="${error}  + '&lt;br /&gt;'"></small>
                 </div>
 
-                <div class="form-group row">
+                <div class="form-group row" th:classappend="${#fields.hasErrors('password')}? 'text-danger'">
                     <label for="password" class="col-sm-4 col-form-label font-weight-bold">New Password</label>
                     <div class="col-sm-8">
                         <input type="password" th:field="*{password}" class="form-control" id="password"
                                placeholder="New Password..."
                                name="password">
                     </div>
+                    <small th:each="error : ${#fields.errors('password')}" th:utext="${error}  + '&lt;br /&gt;'"></small>
                 </div>
 
-                <div class="form-group row" >
+                <div class="form-group row" th:classappend="${#fields.hasErrors('confirmPassword')}? 'text-danger'">
                     <label for="confirmPassword" class="col-sm-4 col-form-label font-weight-bold">Confirm New
                         Password</label>
                     <div class="col-sm-8">
                         <input type="password" th:field="*{confirmPassword}" class="form-control" id="confirmPassword"
                                placeholder="Confirm New Password..." name="confirmPassword">
                     </div>
+                    <small th:each="error : ${#fields.errors('confirmPassword')}" th:utext="${error}  + '&lt;br /&gt;'"></small>
                 </div>
 
-                <div class="form-group row" >
+                <div class="form-group row" th:classappend="${#fields.hasErrors('email')}? 'text-danger'">
                     <label for="email" class="col-sm-4 col-form-label font-weight-bold">Email</label>
                     <div class="col-sm-8">
                         <input th:field="*{email}" type="email" class="form-control" id="email" name="email">
                     </div>
+                    <small th:each="error : ${#fields.errors('email')}" th:utext="${error}  + '&lt;br /&gt;'"></small>
                 </div>
 
                 <hr class="hr-2 bg-dark">

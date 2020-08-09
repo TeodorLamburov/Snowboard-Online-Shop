@@ -5,6 +5,7 @@ import org.springframework.web.multipart.MultipartFile;
 
 import javax.validation.constraints.DecimalMin;
 import javax.validation.constraints.NotEmpty;
+import javax.validation.constraints.NotNull;
 import java.util.List;
 
 public class ProductAddBinding extends BaseBinding {
@@ -22,6 +23,8 @@ public class ProductAddBinding extends BaseBinding {
     }
 
     @Length(min = 3, max = 20, message = "Name length must be between 3 and 20 characters")
+    @NotNull(message = "Name cannot be null.")
+    @NotEmpty(message = "Name cannot be empty")
     public String getProductName() {
         return productName;
     }
@@ -31,6 +34,8 @@ public class ProductAddBinding extends BaseBinding {
     }
 
     @Length(min = 2, max = 30, message = "Brand length must be between 2 and 30 characters")
+    @NotNull(message = "Brand cannot be null.")
+    @NotEmpty(message = "Brand cannot be empty")
     public String getProductBrand() {
         return productBrand;
     }
@@ -39,7 +44,9 @@ public class ProductAddBinding extends BaseBinding {
         this.productBrand = productBrand;
     }
 
-    @Length(min = 3, max = 20, message = "Category length must be between 3 and 20 characters")
+    @Length(min = 2, max = 20, message = "Category length must be between 2 and 20 characters")
+    @NotNull(message = "Category cannot be null.")
+    @NotEmpty(message = "Category cannot be empty")
     public String getProductCategory() {
         return productCategory;
     }
@@ -49,6 +56,8 @@ public class ProductAddBinding extends BaseBinding {
     }
 
     @Length(min = 2, max = 20, message = "Model length must be between 2 and 20 characters")
+    @NotNull(message = "Model cannot be null.")
+    @NotEmpty(message = "Model cannot be empty")
     public String getProductModel() {
         return productModel;
     }
@@ -68,6 +77,8 @@ public class ProductAddBinding extends BaseBinding {
     }
 
     @Length(min = 5, message = "Description length must be at least 5 characters")
+    @NotNull(message = "Description cannot be null.")
+    @NotEmpty(message = "Description cannot be empty")
     public String getDescription() {
         return description;
     }
@@ -77,6 +88,7 @@ public class ProductAddBinding extends BaseBinding {
     }
 
 
+    @NotEmpty(message = "Board size cannot be empty")
     public List<String> getBoardSize() {
         return boardSize;
     }
@@ -85,6 +97,7 @@ public class ProductAddBinding extends BaseBinding {
         this.boardSize = boardSize;
     }
 
+    @NotNull(message = "Image cannot be null.")
     public MultipartFile getPictureUrl() {
         return pictureUrl;
     }

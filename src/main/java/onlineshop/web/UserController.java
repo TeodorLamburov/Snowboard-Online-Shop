@@ -38,6 +38,7 @@ public class UserController {
 
 
     @GetMapping("/register")
+    @PreAuthorize("isAnonymous()")
     public String register(Model model) {
         if (!model.containsAttribute("userRegisterBinding")) {
             model.addAttribute("userRegisterBinding", new UserRegisterBinding());
@@ -46,13 +47,14 @@ public class UserController {
     }
 
     @PostMapping("/register")
+    @PreAuthorize("isAnonymous()")
     public String registerConfirm(@Valid @ModelAttribute("userRegisterBinding")
                                           UserRegisterBinding userRegisterBinding, BindingResult bindingResult,
                                   RedirectAttributes redirectAttributes) {
-        System.out.println();
+
         if (bindingResult.hasErrors()) {
+            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.userRegisterBinding", bindingResult);
             redirectAttributes.addFlashAttribute("userRegisterBinding", userRegisterBinding);
-            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.userRegister", bindingResult);
             return "redirect:/users/register";
         }
 

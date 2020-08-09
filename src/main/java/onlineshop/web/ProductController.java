@@ -75,7 +75,7 @@ public class ProductController {
     }
 
     @GetMapping("/details/{id}")
-    @PreAuthorize("isAuthenticated()")
+    @PreAuthorize("isAnonymous()")
     public ModelAndView details(@PathVariable String id,
                                 ModelAndView modelAndView,
                                 @ModelAttribute("cartModel") CartItemBindingModel cartModel) {
@@ -88,6 +88,7 @@ public class ProductController {
     }
 
     @GetMapping("/all")
+    @PreAuthorize("isAnonymous()")
     public ModelAndView getAllProducts(ModelAndView modelAndView) {
         List<ProductViewModel> products = this.productService.findAllProducts()
                 .stream()

@@ -29,7 +29,7 @@ public class UserEntity extends BaseEntity implements UserDetails {
     }
 
     @Override
-    @Column(name = "username", unique = true, nullable = false)
+    @Column(name = "username", unique = true, nullable = false, updatable = false)
     public String getUsername() {
         return username;
     }

@@ -7,7 +7,7 @@
 </head>
 <body>
 <div class="header">
-    <th:block th:include="~{/fragments/nav}"></th:block>
+    <th:block th:include="~{/fragments/navbar}"></th:block>
 </div>
 <div class="main">
     <div class="shop_top">
@@ -16,47 +16,54 @@
                   th:object="${productAdd}" enctype="multipart/form-data">
                 <div class="register-top-grid">
                     <h3>Product Information</h3>
-                    <div>
+                    <div class="form-group" th:classappend="${#fields.hasErrors('productName')}? 'text-danger'">
                         <span>Product Name
                             <label>*</label>
                         </span>
                         <input th:field="*{productName}" type="text" id="" name="productName">
+                        <small th:each="error : ${#fields.errors('productName')}" th:utext="${error}  + '&lt;br /&gt;'"></small>
                     </div>
-                    <div>
+                    <div class="form-group" th:classappend="${#fields.hasErrors('productBrand')}? 'text-danger'">
                         <span>Brand<label>*</label></span>
                         <input th:field="*{productBrand}" type="text" id="productBrand" name="productBrand"/>
+                        <small th:each="error : ${#fields.errors('productBrand')}" th:utext="${error}  + '&lt;br /&gt;'"></small>
                     </div>
-                    <div>
+                    <div class="form-group" th:classappend="${#fields.hasErrors('productModel')}? 'text-danger'">
                         <span>Model<label>*</label></span>
                         <input th:field="*{productModel}" type="text" id="productModel" name="productModel"/>
-
+                        <small th:each="error : ${#fields.errors('productModel')}" th:utext="${error}  + '&lt;br /&gt;'"></small>
                     </div>
-                    <div>
+                    <div class="form-group" th:classappend="${#fields.hasErrors('productCategory')}? 'text-danger'">
                         <span>Category<label>*</label></span>
                         <input th:field="*{productCategory}" type="text" id="productCategory" name="productCategory"/>
+                        <small th:each="error : ${#fields.errors('productCategory')}" th:utext="${error}  + '&lt;br /&gt;'"></small>
                     </div>
-                    <div>
+                    <div class="form-group" th:classappend="${#fields.hasErrors('productPrice')}? 'text-danger'">
                         <span>Price<label>*</label></span>
                         <input th:field="*{productPrice}" type="number" id="productPrice" name="productPrice"/>
+                        <small th:each="error : ${#fields.errors('productPrice')}" th:utext="${error}  + '&lt;br /&gt;'"></small>
                     </div>
 
-                    <div>
+                    <div class="form-group" th:classappend="${#fields.hasErrors('description')}? 'text-danger'">
                         <span>Board description<label>*</label></span>
                         <textarea th:field="*{description}" type="text" id="description"
                                   name="description"></textarea>
+                        <small th:each="error : ${#fields.errors('description')}" th:utext="${error}  + '&lt;br /&gt;'"></small>
                     </div>
 
-                    <div>
+                    <div class="form-group" th:classappend="${#fields.hasErrors('boardSize')}? 'text-danger'">
                         <span>Size<label for="">*</label></span>
                         <select required multiple class="form-control" id="add-board-sizes"
                                 name="boardSize">
                             <option selected disabled>--- Select Sizes ---</option>
                         </select>
+                        <small th:each="error : ${#fields.errors('boardSize')}" th:utext="${error}  + '&lt;br /&gt;'"></small>
                     </div>
 
-                    <div>
+                    <div class="form-group" th:classappend="${#fields.hasErrors('pictureUrl')}? 'text-danger'">
                         <span>Images<label>*</label></span>
                         <input th:field="*{pictureUrl}" type="file" id="add-product-image" name="pictureUrl"/>
+                        <small th:each="error : ${#fields.errors('pictureUrl')}" th:utext="${error}  + '&lt;br /&gt;'"></small>
                     </div>
 
                     <div class="clear"></div>
