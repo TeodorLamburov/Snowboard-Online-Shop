@@ -1,0 +1,63 @@
+<th:block th:fragment xmlns:th="http://www.w3.org/1999/xhtml">
+    <div class="container">
+        <div class="row">
+            <div class="col-md-12">
+                <div class="header-left">
+                    <div class="logo">
+                        <a href="/home"><img src="/images/logo.png" alt=""/></a>
+                    </div>
+                    <div class="menu">
+                        <a class="toggleMenu" href="#"><img src="/images/nav.png" alt=""/></a>
+                        <ul class="nav" id="nav">
+                            <li><a href="/users/profile">Profile</a></li>
+                            <th:block sec:authorize="hasRole('ROLE_MODERATOR')">
+                                <li><a href="/products/add">Add Product</a></li>
+                                <li><a href="/products/">All Products</a></li>
+                                <li><a href="/sizes/add">Add Size</a></li>
+                                <li><a href="/sizes/all">All Sizes</a></li>
+                                <div class="clear"></div>
+                            </th:block>
+                            <th:block sec:authorize="hasRole('ROLE_ADMIN')">
+                                <li><a href="/users/all">All Users</a></li>
+                            </th:block>
+
+                            <li><a href="/products/all">Products</a></li>
+                        </ul>
+
+                        <script type="text/javascript" src="/js/responsive-nav.js"></script>
+                    </div>
+                    <div class="clear"></div>
+                </div>
+                <div class="header_right">
+
+                    <ul class="icon1 sub-icon1 profile_img">
+                        <li><a class="active-icon c1" href="#"> </a>
+                            <ul class="sub-icon1 list">
+                                <div class="product_control_buttons">
+                                    <a href="#"><img src="images/edit.png" alt=""/></a>
+                                    <a href="#"><img src="images/close_edit.png" alt=""/></a>
+                                </div>
+                                <div class="clear"></div>
+                                <li class="list_img"><img src="images/1.jpg" alt=""/></li>
+                                <th:block th:each="item : ${#session.getAttribute('shopping-cart')}"
+                                          th:object="${item}">
+                                    <li class="list_desc"><h4><a href="/cart/details">Products in your car</a></h4>
+                                        <span class="actual"
+                                              th:text="|*{productName} x *{quantity}">1 x$12.00</span></li>
+                                </th:block>
+                                <div class="login_buttons">
+                                    <div class="check_button"><a href="/cart/details">Check out</a></div>
+                                    <div class="clear"></div>
+                                </div>
+                                <form action="/logout?login" method="post">
+                                    <button class="logout-button nav-link">Logout</button>
+                                </form>
+                                <div class="clear"></div>
+                            </ul>
+                        </li>
+                    </ul>
+                    <div class="clear"></div>
+                </div>
+            </div>
+        </div>
+    </div>
