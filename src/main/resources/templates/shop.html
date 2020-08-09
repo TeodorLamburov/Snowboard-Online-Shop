@@ -16,20 +16,16 @@
                 <div th:each="board : ${allBoards}" th:object="${board}" class="col-md-3 shop_box">
                     <a th:href="@{/products/details/{id}(id=*{id})}">
                         <img th:src="${board.pictureUrl}" class="img-responsive" alt=""/>
-                        <span class="new-box">
-						<span class="new-label">New</span>
 					</span>
 
-                        <span class="sale-box">
-						<span class="sale-label">Sale!</span>
 					</span>
                         <div class="shop_desc">
                             <h3 th:text="${board.productBrand}">Burton</h3>
                             <p th:text="${board.productModel}">Custom</p>
                             <span th:text="${board.productPrice}" class="actual">$12.00</span><br>
                             <ul class="buttons">
-                                <li class="cart"><a href="#">Add To Cart</a></li>
-                                <li class="shop_btn"><a href="#">Read More</a></li>
+                                <li class="cart"><a th:href="@{/products/details/{id}(id=*{id})}">Add To Cart</a></li>
+                                <li class="shop_btn"><a th:href="@{/products/details/{id}(id=*{id})}">Read More</a></li>
                                 <div class="clear"></div>
                             </ul>
                         </div>

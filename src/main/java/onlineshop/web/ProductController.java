@@ -52,7 +52,7 @@ public class ProductController {
                                      ProductAddBinding productAddBinding, BindingResult bindingResult,
                              RedirectAttributes redirectAttributes) throws IOException {
 
-        System.out.println();
+
         if (bindingResult.hasErrors()) {
             redirectAttributes.addFlashAttribute("productAdd", productAddBinding);
             redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.productAdd", bindingResult);
@@ -80,7 +80,7 @@ public class ProductController {
                                 ModelAndView modelAndView,
                                 @ModelAttribute("cartModel") CartItemBindingModel cartModel) {
         ProductViewModel productService = this.productService.findById(id);
-        ProductServiceModel product = this.modelMapper.map(productService,ProductServiceModel.class);
+        ProductServiceModel product = this.modelMapper.map(productService, ProductServiceModel.class);
 
         modelAndView.addObject("product", product);
         modelAndView.setViewName("single");
@@ -132,8 +132,13 @@ public class ProductController {
     @PreAuthorize("hasRole('ROLE_MODERATOR')")
     public ModelAndView editConfirm(@PathVariable String id,
                                     @Valid @ModelAttribute(name = "editModel") ProductEditBindingModel editModel,
-                                    BindingResult bindingResult,
-                                    ModelAndView modelAndView){
+                                    BindingResult bindingResult, RedirectAttributes redirectAttributes,
+                                    ModelAndView modelAndView) {
+        if (bindingResult.hasErrors()) {
+            redirectAttributes.addFlashAttribute("editModel", editModel);
+            redirectAttributes.addFlashAttribute("org.springframework.validation.BindingResult.editModel", bindingResult);
+            modelAndView.setViewName("redirect:/products/add");
+        }
 
         ProductServiceModel serviceModel = this.modelMapper.map(editModel, ProductServiceModel.class);
         this.productService.editById(id, serviceModel);

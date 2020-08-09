@@ -27,11 +27,11 @@
                 <tbody>
                 <th:block th:each="user, iter : ${users}">
                     <tr>
-                        <th th:text="${iter.index + 1}"></th>
-                        <td th:text="${user.username}"></td>
-                        <td th:text="${user.fullName}"></td>
-                        <td th:text="${user.email}"></td>
-                        <td th:text="${#strings.replace(#strings.listJoin(user.authorities, ', '), 'ROLE_', '')}"></td>
+                        <th class="text-center" th:text="${iter.index + 1}"></th>
+                        <td class="text-center" th:text="${user.username}"></td>
+                        <td class="text-center" th:text="${user.fullName}"></td>
+                        <td class="text-center" th:text="${user.email}"></td>
+                        <td class="text-center" th:text="${#strings.replace(#strings.listJoin(user.authorities, ', '), 'ROLE_', '')}"></td>
                         <td>
                             <div class="row d-flex justify-content-center">
                                 <th:block th:if="${#lists.contains(user.authorities, 'ROLE_USER') &&
@@ -77,6 +77,8 @@
         </div>
     </div>
 </div>
-
+<div class="footer">
+    <th:block th:include="~{/fragments/footer}"></th:block>
+</div>
 </body>
 </html>
